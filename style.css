@@ -345,7 +345,7 @@ body.night #hero-illus-night {
 }
 
 .section-title {
-  font-size: 36px;
+  font-size: 26px;
   font-weight: 400;
   letter-spacing: 0.06em;
   color: #2a4a30;
@@ -610,6 +610,7 @@ body.night #hero-illus-night {
 }
 
 .map-venue-address {
+  font-family: Georgia, serif;
   font-size: 12px;
   letter-spacing: 0.08em;
   color: rgba(42, 74, 48, 0.55);
