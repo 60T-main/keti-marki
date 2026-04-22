@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ka">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Keti Invitation</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- Mobile prompt (shown on large screens) -->
+        <div id="mobile-prompt">
+            <div id="mobile-prompt-box">
+                <p id="mobile-prompt-icon">📱</p>
+                <p id="mobile-prompt-title">სტუმრის მოწვევა</p>
+                <p id="mobile-prompt-text">მოწვევა შექმნილია მობილური მოწყობილობისთვის. გთხოვთ გახსნათ თქვენს ტელეფონში.</p>
+            </div>
+        </div>
+        <!-- Entry overlay -->
+        <div id="scene">
+            <div
+                id="wrap"
+                role="button"
+                tabindex="0"
+                aria-label="Open invitation"
+            >
+                <div class="flap flap-left">
+                    <img src="flower-yellow.png" class="flap-flower flap-flower--left" alt="">
+                    <img src="flower-yellow-2.png" class="flap-flower flap-flower--left-1" alt="">
+                    <img src="flower-purple.png" class="flap-flower flap-flower--left-2" alt="">
+                    <img src="flower-purple-2.png" class="flap-flower flap-flower--left-3" alt="">
+                </div>
+                <div class="flap flap-right">
+                    <img src="flower-yellow.png" class="flap-flower flap-flower--right" alt="">
+                    <img src="flower-yellow-2.png" class="flap-flower flap-flower--right-1" alt="">
+                    <img src="flower-purple-2.png" class="flap-flower flap-flower--right-2" alt="">
+                    <img src="flower-purple.png" class="flap-flower flap-flower--right-3" alt="">
+                </div>
+            </div>
+            <img src="wax.png" id="wax" alt="">
+            <p id="hint">SeaxeT TiTi</p>
+        </div>
+        <!-- Hero section (revealed after open) -->
+        <section id="hero">
+            <div class="hero-content">
+                <p class="hero-pre">gepatiJebiT</p>
+                <h1 class="hero-names">
+                    marki
+                    <br>
+                    da
+                    <br>
+                    qeTi
+                </h1>
+                <div class="hero-rule"></div>
+                <p class="hero-date">14 seqtemberi 2026</p>
+            </div>
+            <div id="hero-illustration">
+                <img src="mark-keti.png" id="hero-illus-day" alt="">
+                <img src="mark-keti-night.png" id="hero-illus-night" alt="">
+            </div>
+        </section>
+        <!-- Countdown section -->
+        <section id="countdown-section">
+            <div class="section-inner">
+                <p class="section-pre">დღემდე დარჩა</p>
+                <div id="countdown">
+                    <div class="cd-box">
+                        <span class="cd-num" id="cd-days">00</span>
+                        <span class="cd-label">დღე</span>
+                    </div>
+                    <div class="cd-sep">·</div>
+                    <div class="cd-box">
+                        <span class="cd-num" id="cd-hours">00</span>
+                        <span class="cd-label">საათი</span>
+                    </div>
+                    <div class="cd-sep">·</div>
+                    <div class="cd-box">
+                        <span class="cd-num" id="cd-mins">00</span>
+                        <span class="cd-label">წუთი</span>
+                    </div>
+                    <div class="cd-sep">·</div>
+                    <div class="cd-box">
+                        <span class="cd-num" id="cd-secs">00</span>
+                        <span class="cd-label">წამი</span>
+                    </div>
+                </div>
+                <div class="section-rule"></div>
+                <p class="section-message">
+                    გიხარია, რომ შეგვიძლია გაგიზიაროთ ეს განსაკუთრებული დღე.
+                    <br>
+                    გელოდებით სიყვარულით სავსე დღესასწაულზე.
+                </p>
+            </div>
+        </section>
+        <!-- RSVP section -->
+        <section id="rsvp-section">
+            <div class="section-inner">
+                <p class="section-pre">დადასტურება</p>
+                <h2 class="section-title">მოხვალ?</h2>
+                <div class="section-rule"></div>
+                <form id="rsvp-form" novalidate>
+                    <div class="rsvp-field">
+                        <label class="rsvp-label" for="rsvp-name">სახელი და გვარი</label>
+                        <input
+                            class="rsvp-input"
+                            type="text"
+                            id="rsvp-name"
+                            name="name"
+                            placeholder="თქვენი სახელი"
+                        >
+                    </div>
+                    <div class="rsvp-field">
+                        <label class="rsvp-label">დაესწრებით?</label>
+                        <div class="rsvp-radio-group">
+                            <label class="rsvp-radio-card">
+                                <input type="radio" name="attending" value="yes">
+                                <span>კი, მოვალ</span>
+                            </label>
+                            <label class="rsvp-radio-card">
+                                <input type="radio" name="attending" value="no">
+                                <span>ვერ მოვალ</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="rsvp-field" id="guest-field">
+                        <label class="rsvp-label" for="rsvp-guests">სტუმრების რაოდენობა</label>
+                        <input
+                            class="rsvp-input"
+                            type="number"
+                            id="rsvp-guests"
+                            name="guests"
+                            min="1"
+                            max="10"
+                            placeholder="1"
+                        >
+                    </div>
+                    <div class="rsvp-field">
+                        <label class="rsvp-label" for="rsvp-note">შენიშვნა (არასავალდებულო)</label>
+                        <textarea
+                            class="rsvp-input rsvp-textarea"
+                            id="rsvp-note"
+                            name="note"
+                            rows="3"
+                            placeholder="დიეტური შეზღუდვები, სხვა სურვილები..."
+                        ></textarea>
+                    </div>
+                    <button class="rsvp-btn" type="submit">გაგზავნა</button>
+                </form>
+                <p id="rsvp-thanks" hidden>გმადლობთ! თქვენი პასუხი მიღებულია.</p>
+            </div>
+        </section>
+        <!-- Map section -->
+        <section id="map-section">
+            <div class="section-inner">
+                <p class="section-pre">ადგილმდებარეობა</p>
+                <h2 class="section-title">სად გელოდებით</h2>
+                <div class="section-rule"></div>
+                <div class="map-venues">
+                    <div class="map-venue">
+                        <p class="map-venue-label">ცერემონია</p>
+                        <p class="map-venue-name">ვენიუს სახელი</p>
+                        <p class="map-venue-address">მისამართი, თბილისი</p>
+                        <a
+                            class="map-link"
+                            href="https://maps.google.com"
+                            target="_blank"
+                            rel="noopener"
+                        >გახსენი Google Maps</a>
+                    </div>
+                    <div class="map-divider"></div>
+                    <div class="map-venue">
+                        <p class="map-venue-label">ბანკეტი</p>
+                        <p class="map-venue-name">ვენიუს სახელი</p>
+                        <p class="map-venue-address">მისამართი, თბილისი</p>
+                        <a
+                            class="map-link"
+                            href="https://maps.google.com"
+                            target="_blank"
+                            rel="noopener"
+                        >გახსენი Google Maps</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="footer-names">მარკი &amp; ქეთი</p>
+            <div class="footer-rule"></div>
+            <p class="footer-credit">Made with ♥ by Weddsite</p>
+        </footer>
+        <!-- Night mode toggle -->
+        <button id="night-toggle" aria-label="Toggle night mode">
+            <span class="night-toggle__track">
+                <span class="night-toggle__thumb">
+                    <span class="night-toggle__icon--sun">☀️</span>
+                    <span class="night-toggle__icon--moon">🌙</span>
+                </span>
+            </span>
+        </button>
+        <script src="script.js"></script>
+    </body>
+</html>
