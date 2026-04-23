@@ -5,6 +5,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'BPGNino';
+  src: url('BPG_Nino_Medium_GPL&GNU-15313347368.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +24,7 @@
 
 body {
   background-color: #2a4a30;
-  font-family: 'GeoEka', Georgia, serif;
+  font-family: 'BPGNino', 'GeoEka', Georgia, serif;
   overflow: hidden;
 }
 
@@ -212,7 +219,7 @@ body.night .flap-right {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  min-height: 100vh;
+  min-height: 90vh;
   padding: 72px 24px 0;
   overflow: hidden;
 }
@@ -252,6 +259,7 @@ body.night #hero::after {
   text-align: center;
   position: relative;
   z-index: 2;
+  font-family: GeoEka;
 }
 
 .hero-pre {
@@ -260,6 +268,7 @@ body.night #hero::after {
   font-weight: 300;
   color: #3a5c3e;
   margin-bottom: 24px;
+  
 }
 
 .hero-names {
@@ -283,6 +292,7 @@ body.night #hero::after {
   letter-spacing: 0.18em;
   font-weight: 300;
   color: #3a5c3e;
+  
 }
 
 .hero-rsvp-btn {
@@ -344,13 +354,15 @@ body.night .hero-rsvp-btn:hover {
 #hero-illus-day {
   position: relative;
   opacity: 1;
+  z-index: 1;
 }
 
 #hero-illus-night {
   position: absolute;
   bottom: 0;
   left: 0;
-  opacity: 0;
+  opacity: 1;
+  z-index: 0;
 }
 
 body.night #hero-illus-day {
@@ -412,12 +424,18 @@ body.night #hero-illus-night {
   background-color: #ffffff;
 }
 
+#countdown-section, .section-inner{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 #countdown {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   margin-bottom: 40px;
+  font-family: GeoEka;
 }
 
 .cd-box {
@@ -447,6 +465,149 @@ body.night #hero-illus-night {
   color: #b8933e;
   line-height: 1;
   margin-bottom: 18px;
+}
+
+/* ─────────────────────────────────────────
+   TIMELINE
+───────────────────────────────────────── */
+
+.timeline-flowers{
+  width:100%;
+  position: absolute;
+  top: -18%;
+}
+
+#timeline-section {
+  background-color: #f5ede2;
+  padding-top: 20px;
+  padding-bottom: 60px;
+  position: relative;
+}
+
+#timeline-section .section-inner {
+  padding-bottom: 40px;
+}
+
+#timeline-section .section-pre {
+  color: rgba(42, 74, 48, 0.45);
+}
+
+#timeline-section .section-title {
+  color: #2a4a30;
+}
+
+.timeline {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: rgba(184, 147, 62, 0.3);
+  transform: translateX(-50%);
+}
+
+.tl-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+.tl-item:last-child {
+  margin-bottom: 0;
+}
+
+.tl-item--left {
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: calc(50% + 20px);
+}
+
+.tl-item--right {
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: calc(50% + 20px);
+}
+
+.tl-card {
+  text-align: left;
+  max-width: 160px;
+}
+
+.tl-item--left .tl-card {
+  text-align: right;
+}
+
+.tl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #b8933e;
+  flex-shrink: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tl-item {
+  position: relative;
+}
+
+.tl-time {
+  font-family: 'GeoEka', Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #2a4a30;
+  margin-bottom: 4px;
+}
+
+.tl-title {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: #2a4a30;
+  margin-bottom: 2px;
+  line-height: 1.5;
+}
+
+.tl-desc {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(42, 74, 48, 0.45);
+}
+
+/* Night mode */
+body.night #timeline-section {
+  background-color: #08111c;
+}
+
+body.night #timeline-section .section-pre {
+  color: rgba(245, 237, 226, 0.4);
+}
+
+body.night #timeline-section .section-title {
+  color: #f5ede2;
+}
+
+body.night .timeline::before {
+  background-color: rgba(184, 147, 62, 0.25);
+}
+
+body.night .tl-time,
+body.night .tl-title {
+  color: #f5ede2;
+}
+
+body.night .tl-desc {
+  color: rgba(245, 237, 226, 0.4);
 }
 
 /* ─────────────────────────────────────────
@@ -492,7 +653,7 @@ body.night #hero-illus-night {
   background-color: rgba(245, 237, 226, 0.06);
   border: 1px solid rgba(245, 237, 226, 0.18);
   color: #f5ede2;
-  font-family: 'GeoEka', Georgia, serif;
+  font-family: 'BPGNino', 'GeoEka', Georgia, serif;
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 0.04em;
@@ -553,7 +714,7 @@ body.night #hero-illus-night {
   background-color: #b8933e;
   border: 1px solid #b8933e;
   color: #f5ede2;
-  font-family: 'GeoEka', Georgia, serif;
+  font-family: 'BPGNino', 'GeoEka', Georgia, serif;
   font-size: 10px;
   letter-spacing: 0.32em;
   padding: 17px 40px;
@@ -711,6 +872,32 @@ body.night #hero-illus-night {
   font-size: 10px;
   letter-spacing: 0.18em;
   color: rgba(245, 237, 226, 0.3);
+}
+
+.footer-credit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease, opacity 0.3s ease, background-color 1.5s ease, border-color 1.5s ease;
+}
+
+.footer-credit-link:hover {
+  color: rgba(245, 237, 226, 0.6);
+}
+
+.footer-logo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.3;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.footer-credit-link:hover .footer-logo {
+  opacity: 0.6;
 }
 
 /* ─────────────────────────────────────────
@@ -892,12 +1079,20 @@ body.night .hero-names {
   }
 
   #mobile-prompt-icon {
-    font-size: 36px;
     margin-bottom: 24px;
   }
 
+  #mobile-prompt-logo {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    opacity: 0.8;
+    display: block;
+    margin: 0 auto;
+  }
+
   #mobile-prompt-title {
-    font-family: 'GeoEka', Georgia, serif;
+    font-family: 'BPGNino', 'GeoEka', Georgia, serif;
     font-size: 18px;
     font-weight: 300;
     letter-spacing: 0.12em;
@@ -906,7 +1101,7 @@ body.night .hero-names {
   }
 
   #mobile-prompt-text {
-    font-family: 'GeoEka', Georgia, serif;
+    font-family: 'BPGNino', 'GeoEka', Georgia, serif;
     font-size: 13px;
     font-weight: 300;
     letter-spacing: 0.06em;

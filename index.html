@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Keti Invitation</title>
+        <title>Mark & Keti</title>
         <link
             rel="preload"
             as="image"
@@ -52,9 +52,11 @@
         <!-- Mobile prompt (shown on large screens) -->
         <div id="mobile-prompt">
             <div id="mobile-prompt-box">
-                <p id="mobile-prompt-icon">📱</p>
-                <p id="mobile-prompt-title">სტუმრის მოწვევა</p>
-                <p id="mobile-prompt-text">მოწვევა შექმნილია მობილური მოწყობილობისთვის. გთხოვთ გახსნათ თქვენს ტელეფონში.</p>
+                <p id="mobile-prompt-icon">
+                    <img src="weddsite.png" id="mobile-prompt-logo" alt="Weddsite">
+                </p>
+                <p id="mobile-prompt-title">ქორწილის მოსაწვევი</p>
+                <p id="mobile-prompt-text">მოსაწვევი შექმნილია მობილური მოწყობილობისთვის. გთხოვთ გახსნათ თქვენს ტელეფონში.</p>
             </div>
         </div>
         <!-- Entry overlay -->
@@ -133,7 +135,7 @@
                 decoding="async"
                 fetchpriority="high"
             >
-            <p id="hint">SeaxeT TiTi</p>
+            <p id="hint">შეახეთ თითი</p>
         </div>
         <!-- Hero section (revealed after open) -->
         <section id="hero">
@@ -150,6 +152,9 @@
                 <p class="hero-date">14 seqtemberi 2026</p>
                 <a class="hero-rsvp-btn" href="#rsvp-section">დადასტურება</a>
             </div>
+        </section>
+        <!-- Countdown section -->
+        <section id="countdown-section">
             <div id="hero-illustration">
                 <img
                     src="mark-keti.png"
@@ -166,9 +171,6 @@
                     fetchpriority="low"
                 >
             </div>
-        </section>
-        <!-- Countdown section -->
-        <section id="countdown-section">
             <div class="section-inner">
                 <p class="section-pre">ქორწილამდე დარჩა</p>
                 <div id="countdown">
@@ -198,6 +200,49 @@
                     <br>
                     თქვენი ტექსტი. თქვენი ტექსტი.
                 </p>
+            </div>
+        </section>
+        <!-- Timeline section -->
+        <section id="timeline-section">
+            <img class="timeline-flowers" src="flowers-2.png" alt="">
+            <div class="section-inner">
+                <p class="section-pre">დღის განრიგი</p>
+                <h2 class="section-title">პროგრამა</h2>
+                <div class="section-rule"></div>
+            </div>
+            <div class="timeline">
+                <div class="tl-item tl-item--left">
+                    <div class="tl-card">
+                        <p class="tl-time">16:00</p>
+                        <p class="tl-title">განრიგი</p>
+                        <p class="tl-desc">ლოკაცია</p>
+                    </div>
+                    <div class="tl-dot"></div>
+                </div>
+                <div class="tl-item tl-item--right">
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <p class="tl-time">18:00</p>
+                        <p class="tl-title">განრიგი</p>
+                        <p class="tl-desc">ლოკაცია</p>
+                    </div>
+                </div>
+                <div class="tl-item tl-item--left">
+                    <div class="tl-card">
+                        <p class="tl-time">20:00</p>
+                        <p class="tl-title">განრიგი</p>
+                        <p class="tl-desc">ლოკაცია</p>
+                    </div>
+                    <div class="tl-dot"></div>
+                </div>
+                <div class="tl-item tl-item--right">
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <p class="tl-time">00:00</p>
+                        <p class="tl-title">განრიგი</p>
+                        <p class="tl-desc">ლოკაცია</p>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- RSVP section -->
@@ -294,7 +339,17 @@
         <footer id="footer">
             <p class="footer-names">მარკი &amp; ქეთი</p>
             <div class="footer-rule"></div>
-            <p class="footer-credit">Made with ♥ by Weddsite</p>
+            <p class="footer-credit">
+                <a
+                    href="https://www.instagram.com/weddsites/"
+                    target="_blank"
+                    rel="noopener"
+                    class="footer-credit-link"
+                >
+                    <img src="weddsite.png" class="footer-logo" alt="Weddsite">
+                    Made with ♥ by Weddsite
+                </a>
+            </p>
         </footer>
         <!-- Night mode toggle -->
         <button id="night-toggle" aria-label="Toggle night mode">
