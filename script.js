@@ -9,6 +9,9 @@ function openWrap() {
   if (opened) return;
   opened = true;
 
+  // Start music synchronously (iOS Safari requires play() in gesture handler)
+  if (window.startBgMusic) window.startBgMusic();
+
   // Immediately hide hint
   hint.classList.add('hidden');
 
@@ -77,6 +80,84 @@ wrap.addEventListener('keydown', function (e) {
   });
 }());
 
+/* ── Background music ── */
+(function () {
+  var audio   = document.getElementById('bg-audio');
+  var toggle  = document.getElementById('music-toggle');
+  if (!audio || !toggle) return;
+
+  var TARGET_VOL = 0.5;
+  var fadeTimer  = null;
+
+  function clearFade() {
+    if (fadeTimer) { clearInterval(fadeTimer); fadeTimer = null; }
+  }
+
+  function fadeUp() {
+    clearFade();
+    var step = TARGET_VOL / 30;
+    fadeTimer = setInterval(function () {
+      if (audio.volume + step >= TARGET_VOL) {
+        audio.volume = TARGET_VOL;
+        clearFade();
+      } else {
+        audio.volume = Math.min(audio.volume + step, TARGET_VOL);
+      }
+    }, 50);
+  }
+
+  function fadeOut(cb) {
+    clearFade();
+    fadeTimer = setInterval(function () {
+      var next = Math.max(audio.volume - TARGET_VOL / 30, 0.005);
+      if (next <= 0.005) {
+        audio.volume = 0;
+        audio.pause();
+        clearFade();
+        if (cb) cb();
+      } else {
+        audio.volume = next;
+      }
+    }, 50);
+  }
+
+  // Auto-start on first envelope interaction
+  window.startBgMusic = function () {
+    if (toggle.classList.contains('playing')) return;
+    audio.volume = 0;
+    audio.play().catch(function () {});
+    toggle.classList.add('playing');
+    fadeUp();
+  };
+
+  // iOS-safe: play() called synchronously in gesture, ramp volume separately
+  toggle.addEventListener('click', function () {
+    if (toggle.classList.contains('playing')) {
+      toggle.classList.remove('playing');
+      fadeOut();
+    } else {
+      audio.volume = 0;
+      audio.play().catch(function () {});
+      toggle.classList.add('playing');
+      fadeUp();
+    }
+  });
+
+  // Pause when tab is hidden, resume when visible again
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      if (!audio.paused) {
+        audio.pause();
+      }
+    } else {
+      if (toggle.classList.contains('playing')) {
+        audio.play().catch(function () {});
+        audio.volume = TARGET_VOL;
+      }
+    }
+  });
+}());
+
 /* ── Night mode ── */
 (function () {
   var toggle = document.getElementById('night-toggle');
@@ -94,5 +175,79 @@ wrap.addEventListener('keydown', function (e) {
 
   toggle.addEventListener('click', function () {
     setNight(!document.body.classList.contains('night'));
+  });
+}());
+
+/* ── Timeline popups ── */
+(function () {
+  var overlay   = document.getElementById('tl-popup-overlay');
+  var closeBtn  = document.getElementById('tl-popup-close');
+  var elTime    = document.getElementById('tl-popup-time');
+  var elTitle   = document.getElementById('tl-popup-title');
+  var elLoc     = document.getElementById('tl-popup-location');
+  var elBody    = document.getElementById('tl-popup-body');
+
+  if (!overlay) return;
+
+  var data = {
+    event1: {
+      time: '16:00',
+      title: 'განრიგი',
+      location: 'ლოკაცია',
+      body: 'დამატებითი ინფორმაცია ამ ღონისძიების შესახებ.'
+    },
+    event2: {
+      time: '18:00',
+      title: 'განრიგი',
+      location: 'ლოკაცია',
+      body: 'დამატებითი ინფორმაცია ამ ღონისძიების შესახებ.'
+    },
+    event3: {
+      time: '20:00',
+      title: 'განრიგი',
+      location: 'ლოკაცია',
+      body: 'დამატებითი ინფორმაცია ამ ღონისძიების შესახებ.'
+    },
+    event4: {
+      time: '00:00',
+      title: 'განრიგი',
+      location: 'ლოკაცია',
+      body: 'დამატებითი ინფორმაცია ამ ღონისძიების შესახებ.'
+    }
+  };
+
+  function openPopup(key) {
+    var d = data[key];
+    if (!d) return;
+    elTime.textContent  = d.time;
+    elTitle.textContent = d.title;
+    elLoc.textContent   = d.location;
+    elBody.textContent  = d.body;
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePopup() {
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.tl-card[data-popup]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      openPopup(card.dataset.popup);
+    });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') openPopup(card.dataset.popup);
+    });
+  });
+
+  closeBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePopup();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePopup();
   });
 }());

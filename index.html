@@ -212,35 +212,59 @@
             </div>
             <div class="timeline">
                 <div class="tl-item tl-item--left">
-                    <div class="tl-card">
+                    <div
+                        class="tl-card"
+                        data-popup="event1"
+                        role="button"
+                        tabindex="0"
+                    >
                         <p class="tl-time">16:00</p>
                         <p class="tl-title">განრიგი</p>
                         <p class="tl-desc">ლოკაცია</p>
+                        <span class="tl-more">დეტალები</span>
                     </div>
                     <div class="tl-dot"></div>
                 </div>
                 <div class="tl-item tl-item--right">
                     <div class="tl-dot"></div>
-                    <div class="tl-card">
+                    <div
+                        class="tl-card"
+                        data-popup="event2"
+                        role="button"
+                        tabindex="0"
+                    >
                         <p class="tl-time">18:00</p>
                         <p class="tl-title">განრიგი</p>
                         <p class="tl-desc">ლოკაცია</p>
+                        <span class="tl-more">დეტალები</span>
                     </div>
                 </div>
                 <div class="tl-item tl-item--left">
-                    <div class="tl-card">
+                    <div
+                        class="tl-card"
+                        data-popup="event3"
+                        role="button"
+                        tabindex="0"
+                    >
                         <p class="tl-time">20:00</p>
                         <p class="tl-title">განრიგი</p>
                         <p class="tl-desc">ლოკაცია</p>
+                        <span class="tl-more">დეტალები</span>
                     </div>
                     <div class="tl-dot"></div>
                 </div>
                 <div class="tl-item tl-item--right">
                     <div class="tl-dot"></div>
-                    <div class="tl-card">
+                    <div
+                        class="tl-card"
+                        data-popup="event4"
+                        role="button"
+                        tabindex="0"
+                    >
                         <p class="tl-time">00:00</p>
                         <p class="tl-title">განრიგი</p>
                         <p class="tl-desc">ლოკაცია</p>
+                        <span class="tl-more">დეტალები</span>
                     </div>
                 </div>
             </div>
@@ -351,6 +375,32 @@
                 </a>
             </p>
         </footer>
+        <!-- Timeline popup -->
+        <div id="tl-popup-overlay" aria-hidden="true">
+            <div id="tl-popup-box" role="dialog" aria-modal="true">
+                <button id="tl-popup-close" aria-label="დახურვა">&times;</button>
+                <p id="tl-popup-time"></p>
+                <h3 id="tl-popup-title"></h3>
+                <div id="tl-popup-rule"></div>
+                <p id="tl-popup-location"></p>
+                <p id="tl-popup-body"></p>
+            </div>
+        </div>
+        <!-- Background music -->
+        <audio
+            id="bg-audio"
+            src="music.mp3"
+            loop
+            preload="auto"
+        ></audio>
+        <!-- Music toggle -->
+        <button id="music-toggle" aria-label="Toggle music">
+            <span class="music-toggle__track">
+                <span class="music-toggle__thumb">
+                    <span class="music-toggle__icon">&#9834;</span>
+                </span>
+            </span>
+        </button>
         <!-- Night mode toggle -->
         <button id="night-toggle" aria-label="Toggle night mode">
             <span class="night-toggle__track">
