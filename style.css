@@ -387,7 +387,7 @@ body.night #hero-illus-night {
 }
 
 .section-pre {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   color: rgba(42, 74, 48, 0.5);
   margin-bottom: 36px;
@@ -409,8 +409,8 @@ body.night #hero-illus-night {
 }
 
 .section-message {
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: 0.06em;
   line-height: 2;
   color: rgba(42, 74, 48, 0.65);

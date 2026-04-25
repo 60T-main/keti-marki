@@ -39,7 +39,9 @@ wrap.addEventListener('keydown', function (e) {
 
 /* ── Countdown ── */
 (function () {
-  var target = new Date('2026-09-14T18:00:00');
+  var dateSource = document.querySelector('[data-wedding-datetime]');
+  var targetIso = dateSource ? dateSource.getAttribute('data-wedding-datetime') : '';
+  var target = targetIso ? new Date(targetIso) : new Date('2026-06-06T18:00:00+04:00');
   var days  = document.getElementById('cd-days');
   var hours = document.getElementById('cd-hours');
   var mins  = document.getElementById('cd-mins');
@@ -48,6 +50,10 @@ wrap.addEventListener('keydown', function (e) {
   function pad(n) { return String(n).padStart(2, '0'); }
 
   function tick() {
+    if (Number.isNaN(target.getTime())) {
+      days.textContent = hours.textContent = mins.textContent = secs.textContent = '00';
+      return;
+    }
     var diff = target - Date.now();
     if (diff <= 0) {
       days.textContent = hours.textContent = mins.textContent = secs.textContent = '00';
@@ -69,14 +75,91 @@ wrap.addEventListener('keydown', function (e) {
 
 /* ── RSVP form ── */
 (function () {
-  var form   = document.getElementById('rsvp-form');
+  var API_URL = 'https://weddsites-backend.vercel.app/api/rsvp';
+  var PROJECT_ID = 'keti-mark-2026';
+  var form = document.getElementById('rsvp-form');
   var thanks = document.getElementById('rsvp-thanks');
   if (!form) return;
 
-  form.addEventListener('submit', function (e) {
+  function parseName(fullName) {
+    var normalized = (fullName || '').trim().replace(/\s+/g, ' ');
+    if (!normalized) return { name: '', surname: '' };
+    var parts = normalized.split(' ');
+    return {
+      name: parts[0] || '',
+      surname: parts.slice(1).join(' ')
+    };
+  }
+
+  async function submitRsvp(payload) {
+    var requestBody = {
+      projectId: PROJECT_ID,
+      name: payload.name,
+      surname: payload.surname || '',
+      attendance: payload.attendance,
+      guestCount:
+        payload.guestCount === undefined || payload.guestCount === null || payload.guestCount === ''
+          ? undefined
+          : Number(payload.guestCount)
+    };
+
+    var response = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody)
+    });
+
+    var result = await response.json().catch(function () { return {}; });
+    if (!response.ok) {
+      throw new Error(result.error || 'RSVP submit failed');
+    }
+    return result;
+  }
+
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
-    form.hidden = true;
+
+    var fullName = document.getElementById('rsvp-name');
+    var attendanceEl = form.querySelector('input[name="attending"]:checked');
+    var guestCountEl = document.getElementById('rsvp-guests');
+    var submitBtn = form.querySelector('button[type="submit"]');
+
+    var parsed = parseName(fullName ? fullName.value : '');
+    var attendance = attendanceEl ? attendanceEl.value : '';
+    var guestCount = guestCountEl ? guestCountEl.value : '';
+
+    if (!parsed.name) {
+      thanks.hidden = false;
+      thanks.textContent = 'გთხოვთ შეიყვანოთ სახელი.';
+      return;
+    }
+
+    if (attendance !== 'yes' && attendance !== 'no') {
+      thanks.hidden = false;
+      thanks.textContent = 'გთხოვთ აირჩიოთ დასწრება.';
+      return;
+    }
+
+    if (submitBtn) submitBtn.disabled = true;
     thanks.hidden = false;
+    thanks.textContent = 'იგზავნება...';
+
+    try {
+      await submitRsvp({
+        name: parsed.name,
+        surname: parsed.surname,
+        attendance: attendance,
+        guestCount: attendance === 'yes' ? guestCount : ''
+      });
+
+      form.hidden = true;
+      thanks.textContent = 'გმადლობთ! თქვენი პასუხი მიღებულია.';
+    } catch (err) {
+      thanks.textContent = 'დაფიქსირდა შეცდომა. გთხოვთ სცადოთ თავიდან.';
+      console.error(err);
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 }());
 
@@ -191,29 +274,20 @@ wrap.addEventListener('keydown', function (e) {
 
   var data = {
     event1: {
-      time: '16:00',
-      title: 'განრიგი',
-      location: 'ლოკაცია',
-      body: 'დამატებითი ინფორმაცია ამ ღონისძიების შესახებ.'
+      time: '12:00',
+      title: 'ფოტოსესია',
+      location: '',
     },
     event2: {
-      time: '18:00',
-      title: 'განრიგი',
-      location: 'ლოკაცია',
-      body: 'დამატებითი ინფორმაცია ამ ღონისძიების შესახებ.'
+      time: '15:00',
+      title: 'ჯვრისწერა',
+      location: '',
     },
     event3: {
-      time: '20:00',
-      title: 'განრიგი',
-      location: 'ლოკაცია',
-      body: 'დამატებითი ინფორმაცია ამ ღონისძიების შესახებ.'
+      time: '18:00',
+      title: 'ვახშამი',
+      location: '',
     },
-    event4: {
-      time: '00:00',
-      title: 'განრიგი',
-      location: 'ლოკაცია',
-      body: 'დამატებითი ინფორმაცია ამ ღონისძიების შესახებ.'
-    }
   };
 
   function openPopup(key) {
