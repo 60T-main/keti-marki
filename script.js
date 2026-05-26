@@ -277,16 +277,19 @@ wrap.addEventListener('keydown', function (e) {
       time: '12:00',
       title: 'ფოტოსესია',
       location: '',
+      mapUrl: '',
     },
     event2: {
-      time: '15:00',
+      time: '14:30',
       title: 'ჯვრისწერა',
-      location: '',
+      location: 'ზემო ბეთლემის მაცხოვრის შობის ეკლესია',
+      mapUrl: 'https://maps.app.goo.gl/BArJN5yjgWxhmARa8',
     },
     event3: {
       time: '18:00',
       title: 'ვახშამი',
-      location: '',
+      location: 'ვილა სააკაძე',
+      mapUrl: 'https://maps.app.goo.gl/1KFbeZTE2ryfciRFA',
     },
   };
 
@@ -295,8 +298,14 @@ wrap.addEventListener('keydown', function (e) {
     if (!d) return;
     elTime.textContent  = d.time;
     elTitle.textContent = d.title;
-    elLoc.textContent   = d.location;
-    elBody.textContent  = d.body;
+    if (d.location && d.mapUrl) {
+      elLoc.innerHTML = '📍 <a href="' + d.mapUrl + '" target="_blank" rel="noopener" class="popup-map-link">' + d.location + '</a>';
+    } else if (d.location) {
+      elLoc.textContent = '📍 ' + d.location;
+    } else {
+      elLoc.textContent = '';
+    }
+    elBody.textContent  = d.body || '';
     overlay.setAttribute('aria-hidden', 'false');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';

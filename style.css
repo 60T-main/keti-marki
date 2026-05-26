@@ -596,6 +596,16 @@ body.night #hero-illus-night {
   color: rgba(42, 74, 48, 0.45);
 }
 
+.tl-location {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: rgba(42, 74, 48, 0.5);
+  line-height: 1.5;
+  margin-top: 5px;
+  word-break: break-word;
+  font-weight: bold;
+}
+
 /* Night mode */
 body.night #timeline-section {
   background-color: #08111c;
@@ -620,6 +630,10 @@ body.night .tl-title {
 
 body.night .tl-desc {
   color: rgba(245, 237, 226, 0.4);
+}
+
+body.night .tl-location {
+  color: rgba(245, 237, 226, 0.38);
 }
 
 body.night .tl-more {
@@ -706,10 +720,27 @@ body.night .tl-more {
 }
 
 #tl-popup-location {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: rgba(42, 74, 48, 0.45);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: rgba(42, 74, 48, 0.55);
   margin-bottom: 12px;
+  text-align: start;
+  line-height: 1.6;
+}
+
+.popup-map-link {
+  color: #b8933e;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184, 147, 62, 0.4);
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 1.5s ease;
+}
+
+.popup-map-link:hover {
+  border-bottom-color: #b8933e;
+}
+
+body.night .popup-map-link {
+  color: rgba(184, 147, 62, 0.85);
 }
 
 #tl-popup-body {
